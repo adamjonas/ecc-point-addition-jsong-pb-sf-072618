@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="1" name="pytest" skips="0" tests="1" time="0.470"><testcase classname="test.index_test.PointTest" file="test/index_test.py" line="5" name="test_add0" time="0.0009918212890625"><failure message="TypeError: unsupported operand type(s) for ** or pow(): &apos;NoneType&apos; and &apos;int&apos;">self = &lt;index_test.PointTest testMethod=test_add0&gt;
+
+    def test_add0(self):
+&gt;       a = Point(x=None, y=None, a=5, b=7)
+
+test/index_test.py:7: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Point(infinity), x = None, y = None, a = 5, b = 7
+
+    &quot;cell_type&quot;: &quot;code&quot;,
+    &quot;execution_count&quot;: 4,
+    &quot;metadata&quot;: {},
+    &quot;outputs&quot;: [],
+    &quot;source&quot;: [
+     &quot;a, b = 5, 7\n&quot;,
+     &quot;x1, y1 = -1, -1\n&quot;,
+     &quot;\n&quot;,
+     &quot;# formula in python\n&quot;,
+     &quot;# s = (3*x1**2+a)/(2*y1)\n&quot;,
+&gt;    &quot;# x3 = s**2 - 2*x1\n&quot;,
+     &quot;# y3 = s*(x1-x3) - y1&quot;
+    ]
+      },
+      {
+       &quot;cell_type&quot;: &quot;markdown&quot;,
+       &quot;metadata&quot;: {},
+       &quot;source&quot;: [
+        &quot;### Test Driven Exercise\n&quot;,
+        &quot;\n&quot;,
+        &quot;#### Make an update to the `__init__` method to handle the point at infinity and then add the `__add__` method to your library.&quot;
+       ]
+      },
+      {
+       &quot;cell_type&quot;: &quot;code&quot;,
+       &quot;execution_count&quot;: 12,
+       &quot;metadata&quot;: {},
+       &quot;outputs&quot;: [],
+       &quot;source&quot;: [
+        &quot;from ecc import Point\n&quot;,
+        &quot;\n&quot;,
+        &quot;class Point(Point):\n&quot;,
+        &quot;    \n&quot;,
+        &quot;    def __init__(self, x, y, a, b):\n&quot;,
+        &quot;        self.a = a\n&quot;,
+        &quot;        self.b = b\n&quot;,
+        &quot;        self.x = x\n&quot;,
+        &quot;        self.y = y\n&quot;,
+        &quot;        # x being None and y being None represents the point at infinity\n&quot;,
+        &quot;        # Check for that here since the equation below won&apos;t make sense\n&quot;,
+        &quot;        # with None values for both.\n&quot;,
+        &quot;        # make sure that the elliptic curve equation is satisfied\n&quot;,
+        &quot;        # y**2 == x**3 + a*x + b\n&quot;,
+        &quot;        if self.y**2 != self.x**3 + a*x + b:\n&quot;,
+        &quot;        # if not, throw a RuntimeError\n&quot;,
+        &quot;            raise RuntimeError(&apos;({}, {}) is not on the curve&apos;.format(self.x, self.y))\n&quot;,
+        &quot;\n&quot;,
+        &quot;    def __add__(self, other):\n&quot;,
+        &quot;        if self.a != other.a or self.b != other.b:\n&quot;,
+        &quot;            raise RuntimeError(&apos;Points {}, {} are not on the same curve&apos;.format(self, other))\n&quot;,
+        &quot;        # Case 0.0: self is the point at infinity, return other\n&quot;,
+        &quot;        # Case 0.1: other is the point at infinity, return self\n&quot;,
+        &quot;\n&quot;,
+        &quot;        # Case 1: self.x == other.x, self.y != other.y\n&quot;,
+        &quot;        # Result is point at infinity\n&quot;,
+        &quot;        # Remember to return an instance of this class:\n&quot;,
+        &quot;        # self.__class__(x, y, a, b)\n&quot;,
+        &quot;        pass&quot;
+       ]
+      }
+     ],
+     &quot;metadata&quot;: {
+      &quot;kernelspec&quot;: {
+       &quot;display_name&quot;: &quot;Python 3&quot;,
+       &quot;language&quot;: &quot;python&quot;,
+       &quot;name&quot;: &quot;python3&quot;
+      },
+      &quot;language_info&quot;: {
+       &quot;codemirror_mode&quot;: {
+        &quot;name&quot;: &quot;ipython&quot;,
+        &quot;version&quot;: 3
+       },
+       &quot;file_extension&quot;: &quot;.py&quot;,
+       &quot;mimetype&quot;: &quot;text/x-python&quot;,
+       &quot;name&quot;: &quot;python&quot;,
+       &quot;nbconvert_exporter&quot;: &quot;python&quot;,
+       &quot;pygments_lexer&quot;: &quot;ipython3&quot;,
+       &quot;version&quot;: &quot;3.6.6&quot;
+      }
+     },
+     &quot;nbformat&quot;: 4,
+     &quot;nbformat_minor&quot;: 2
+    }
+E   TypeError: unsupported operand type(s) for ** or pow(): &apos;NoneType&apos; and &apos;int&apos;
+
+index.ipynb:95: TypeError</failure></testcase></testsuite>
